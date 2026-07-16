@@ -17,13 +17,15 @@ Para isso, o ambiente de desenvolvimento local foi configurado do zero e o compo
 
 ### Evidências de Funcionamento (Prints)
 
-- ![Print do Dialog no Author](<img width="977" height="662" alt="componente-campo" src="https://github.com/user-attachments/assets/6aef3fd7-79ca-4e0e-9ce2-f6d05f67d874" />
-)
-  *Configuração do componente no modo Author demonstrando o novo campo adicionado.*
+<img width="977" height="662" alt="componente-campo" src="https://github.com/user-attachments/assets/6aef3fd7-79ca-4e0e-9ce2-f6d05f67d874" />
+<br>
+<em>Configuração do componente no modo Author demonstrando o novo campo adicionado.</em>
 
-- ![Print do Componente Renderizado](<img width="625" height="619" alt="componente-atualizada" src="https://github.com/user-attachments/assets/72476d05-5803-45b8-acb0-2fba79a7f989" />
-)
-  *Resultado final do componente renderizado na página de teste com o subtítulo.*
+<br><br>
+
+<img width="625" height="619" alt="componente-atualizada" src="https://github.com/user-attachments/assets/72476d05-5803-45b8-acb0-2fba79a7f989" />
+<br>
+<em>Resultado final do componente renderizado na página de teste com o subtítulo.</em>
 
 ---
 
