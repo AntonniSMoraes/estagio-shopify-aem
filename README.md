@@ -1,124 +1,148 @@
-# Sample AEM project template
+# Projeto AEM
 
-This is a project template for AEM-based applications. It is intended as a best-practice set of examples as well as a potential starting point to develop your own functionality.
+Este repositório contém a resolução dos **Desafios Relacionados ao AEM** do Programa de Estágio WebJump. O projeto utiliza como base o template de melhores práticas da Adobe para aplicações AEM.
 
-## Modules
+## Conteúdo
+1. Solução para o desafio 5.1 - Ambiente + primeiro deploy do WKND
+2. Solução para o desafio 5.2 - Componente do zero: Cartão de Perfil
 
-The main parts of the template are:
+## Objetivo do Desafio 5.1
+O objetivo principal deste desafio é provar o domínio do ciclo de desenvolvimento no AEM: **editar → build → deploy → ver no Author**. 
+Para isso, o ambiente de desenvolvimento local foi configurado do zero e o componente padrão `HelloWorld` foi modificado para exibir um novo campo personalizado.
 
-* [core:](core/README.md) Java bundle containing all core functionality like OSGi services, listeners or schedulers, as well as component-related Java code such as servlets or request filters.
-* [it.tests:](it.tests/README.md) Java based integration tests
-* [ui.apps:](ui.apps/README.md) contains the /apps (and /etc) parts of the project, ie JS&CSS clientlibs, components, and templates
-* [ui.content:](ui.content/README.md) contains sample content using the components from the ui.apps
-* ui.config: contains runmode specific OSGi configs for the project
-* [ui.frontend:](ui.frontend.general/README.md) an optional dedicated front-end build mechanism (Angular, React or general Webpack project)
-* [ui.tests:](ui.tests/README.md) Cypress based UI tests (for other frameworks check [aem-test-samples](https://github.com/adobe/aem-test-samples) repository
-* all: a single content package that embeds all of the compiled modules (bundles and content packages) including any vendor dependencies
-* analyse: this module runs analysis on the project which provides additional validation for deploying into AEMaaCS
+### O que foi implementado:
+1. **Configuração de Ambiente:** Instalação do JDK 21, Apache Maven 3.9.x e AEM SDK.
+2. **Sling Model (`HelloWorldModel.java`):** Lógica Java alterada para receber a injeção de um novo campo customizado (Subtítulo) via `@ValueMapValue`.
+3. **Dialog (`_cq_dialog/.content.xml`):** Inclusão de um novo campo de input de texto no painel de autoria do AEM.
+4. **HTL (`helloworld.html`):** Marcação visual atualizada para exibir o valor dinâmico do novo campo utilizando a linguagem de template HTL (ex: `${model.subtitulo}`).
 
-## How to build
+## Objetivo do Desafio 5.2
+O objetivo principal deste desafio é construir um componente do zero **(Cartão de Perfil)**, sem herdar dos Core Components da Adobe, para consolidar o entendimento da arquitetura de componentes autônomos no AEM.
+Para isso, toda a estrutura de pastas, dialog, lógica de back-end (Java) e renderização condicional no front-end (HTL) foram desenvolvidas manualmente.
 
-To build all the modules run in the project root directory the following command with Maven 3:
+### O que foi implementado:
+1. **Nó do Componente (`.content.xml`):** Criação da raiz do componente no módulo `ui.apps`, definindo sua identidade e alocando-o no grupo "WKND - Custom".
+2. **Sling Model (`PerfilModel.java`):** Criação da classe Java no módulo `core` para resgatar os valores preenchidos pelo autor (Nome, Cargo e Biografia) utilizando a anotação `@ValueMapValue`.
+3. **Dialog (`_cq_dialog/.content.xml`):** Construção da interface de autoria com campos do tipo *textfield* e *textarea*.
+4. **HTL (`perfil.html`):** Desenvolvimento da marcação visual puxando as variáveis do back-end. Foi aplicada a lógica condicional `data-sly-test="${model.cargo}"` para ocultar o elemento HTML do cargo caso o autor deixe o campo em branco.
+5. **Estilização SCSS (`_perfil.scss`):** Aplicação de estilos seguindo a metodologia BEM (ex: `cmp-perfil`) e integração da compilação do arquivo diretamente no `main.scss` do projeto.
 
-    mvn clean install
+### Evidências de Funcionamento (Prints)
 
-To build all the modules and deploy the `all` package to a local instance of AEM, run in the project root directory the following command:
+<img width="977" height="662" alt="componente-campo" src="https://github.com/user-attachments/assets/6aef3fd7-79ca-4e0e-9ce2-f6d05f67d874" />
+<br>
+<em>5.1 - Configuração do componente no modo Author demonstrando o novo campo adicionado.</em>
 
-    mvn clean install -PautoInstallSinglePackage
+<br><br>
 
-Or to deploy it to a publish instance, run
+<img width="625" height="619" alt="componente-atualizada" src="https://github.com/user-attachments/assets/72476d05-5803-45b8-acb0-2fba79a7f989" />
+<br>
+<em>5.1 - Resultado final do componente renderizado na página de teste com o subtítulo.</em>
 
-    mvn clean install -PautoInstallSinglePackagePublish
+<br><br>
 
-Or alternatively
+<img width="977" height="662" alt="componente-campo" src="https://github.com/user-attachments/assets/6aef3fd7-79ca-4e0e-9ce2-f6d05f67d874" />
+<br>
+<em>5.2 - Configuração do Cartão de Perfil no modo Author demonstrando os 3 campos criados.</em>
 
-    mvn clean install -PautoInstallSinglePackage -Daem.port=4503
+<br><br>
 
-Or to deploy only the bundle to the author, run
+<img width="625" height="619" alt="componente-atualizada" src="https://github.com/user-attachments/assets/72476d05-5803-45b8-acb0-2fba79a7f989" />
+<br>
+<em>5.2 - Resultado final do Cartão de Perfil estilizado e renderizado na página.</em>
+<br>
+<br>
 
-    mvn clean install -PautoInstallBundle
 
-Or to deploy only a single content package, run in the sub-module directory (i.e `ui.apps`)
+## Pré-requisitos do Ambiente
 
-    mvn clean install -PautoInstallPackage
+Antes de configurar o AEM, certifique-se de que os seguintes requisitos estão instalados e configurados:
 
-## Documentation
+### Para Linux (Ubuntu)
+1. **Java Development Kit (JDK 21):**
+    ```bash
+    sudo apt update
+    sudo apt install openjdk-21-jdk
+    sudo update-alternatives --config java
+    export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+    ```
 
-The build process also generates documentation in the form of README.md files in each module directory for easy reference. Depending on the options you select at build time, the content may be customized to your project.
+2. **Apache Maven (versão 3.9.x):**
+   ```bash
+    wget [https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz](https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz)
+    sudo tar xf apache-maven-3.9.9-bin.tar.gz -C /opt
+    export PATH=/opt/apache-maven-3.9.9/bin:$PATH
+    ```
 
-## Testing
+    ou
 
-There are three levels of testing contained in the project:
+    ```bash
+    sudo apt install maven
+    ```
 
-### Unit tests
+### Para Windows
+1. **Java Development Kit (JDK 21):**
+    - Baixe o instalador do OpenJDK 21 ou Oracle JDK 21 e execute-o.
+    - Adicione a variável de ambiente JAVA_HOME apontando para a pasta de instalação (ex: C:\Program Files\Java\jdk-21).
 
-This show-cases classic unit testing of the code contained in the bundle. To
-test, execute:
+2. **Apache Maven (versão 3.9.x):**
+    - Baixe o arquivo .zip no site oficial do Maven (maven.apache.org).
 
-    mvn clean test
+    - Extraia na raiz do seu disco (ex: C:\apache-maven-3.9.9).
+    
+    - Adicione o caminho C:\apache-maven-3.9.9\bin à variável de ambiente Path do Windows.
 
-### Integration tests
 
-This allows running integration tests that exercise the capabilities of AEM via
-HTTP calls to its API. To run the integration tests, run:
+## Download e Configuração do AEM Author (SDK)
+1. Download do SDK
 
-    mvn clean verify -Plocal
+    - Acesse o portal da Adobe Software Distribution com o seu Adobe ID (sua organização deve estar provisionada para o AEM as a Cloud Service).
+    
+    - Localize e faça o download do zip do AEM SDK mais recente.
+    
+    - Descompacte o arquivo baixado. Você encontrará o arquivo Quickstart Jar (ex: aem-sdk-quickstart-xxxx.xxx.jar).
 
-Test classes must be saved in the `src/main/java` directory (or any of its
-subdirectories), and must be contained in files matching the pattern `*IT.java`.
+    - Crie uma pasta "author" e mova o .jar para ela com os segintes comandos:
+    
+    ### Linux (Ubuntu)
+        
+    ```bash
+    mkdir -p /aem-sdk/author
+    cp caminho\para\aem-sdk-quickstart-xxxx.xxx.jar /aem-sdk/author/aem-author-p4502.jar
+    ```
+    
+    ### Windows
+    ```bash
+    mkdir -p C:\aem-sdk\author
+    cp caminho\para\aem-sdk-quickstart-xxxx.xxx.jar C:\aem-sdk\author\aem-author-p4502.jar
+    ```
 
-The configuration provides sensible defaults for a typical local installation of
-AEM. If you want to point the integration tests to different AEM author and
-publish instances, you can use the following system properties via Maven's `-D`
-flag.
 
-| Property              | Description                                         | Default value           |
-|-----------------------|-----------------------------------------------------|-------------------------|
-| `it.author.url`       | URL of the author instance                          | `http://localhost:4502` |
-| `it.author.user`      | Admin user for the author instance                  | `admin`                 |
-| `it.author.password`  | Password of the admin user for the author instance  | `admin`                 |
-| `it.publish.url`      | URL of the publish instance                         | `http://localhost:4503` |
-| `it.publish.user`     | Admin user for the publish instance                 | `admin`                 |
-| `it.publish.password` | Password of the admin user for the publish instance | `admin`                 |
+2. Inicialização do AEM Author
 
-The integration tests in this archetype use the [AEM Testing
-Clients](https://github.com/adobe/aem-testing-clients) and showcase some
-recommended [best
-practices](https://github.com/adobe/aem-testing-clients/wiki/Best-practices) to
-be put in use when writing integration tests for AEM.
+    - Abra o terminal/prompt de comando na pasta author, e execute o comando
+    ```bash
+    java -jar aem-author-p4502.jar
+    ```
 
-## Static Analysis
+O navegador abrirá automaticamente em localhost:4502 após alguns minutos. Login padrão: admin/admin (talvez seja necessário definir o login durante a primeira execução).
 
-The `analyse` module performs static analysis on the project for deploying into AEMaaCS. It is automatically
-run when executing
+## Instalação e Execução (AEM-GUIDES-WKND)
 
-    mvn clean install
+Para testar ou instalar este projeto em uma instância local do AEM (Author rodando na porta `4502`), siga os passos abaixo:
 
-from the project root directory. Additional information about this analysis and how to further configure it
-can be found here https://github.com/adobe/aemanalyser-maven-plugin
+### 1. Clonar o repositório
+```bash
+git clone [https://github.com/adobe/aem-guides-wknd.git](https://github.com/adobe/aem-guides-wknd.git)
+cd aem-guides-wknd
+```
 
-### UI tests
+### 2. Compilar e Realizar o Deploy (Build)
 
-They will test the UI layer of your AEM application using Cypress framework.
+No diretório raiz do projeto clonado, execute o comando de deploy:
 
-Check README file in `ui.tests` module for more details.
+```bash
+mvn clean install -PautoInstallSinglePackage
+```
 
-Examples of UI tests in different frameworks can be found here: https://github.com/adobe/aem-test-samples
-
-## ClientLibs
-
-The frontend module is made available using an [AEM ClientLib](https://helpx.adobe.com/experience-manager/6-5/sites/developing/using/clientlibs.html). When executing the NPM build script, the app is built and the [`aem-clientlib-generator`](https://github.com/wcm-io-frontend/aem-clientlib-generator) package takes the resulting build output and transforms it into such a ClientLib.
-
-A ClientLib will consist of the following files and directories:
-
-- `css/`: CSS files which can be requested in the HTML
-- `css.txt` (tells AEM the order and names of files in `css/` so they can be merged)
-- `js/`: JavaScript files which can be requested in the HTML
-- `js.txt` (tells AEM the order and names of files in `js/` so they can be merged
-- `resources/`: Source maps, non-entrypoint code chunks (resulting from code splitting), static assets (e.g. icons), etc.
-
-## Maven settings
-
-The project comes with the auto-public repository configured. To setup the repository in your Maven settings, refer to:
-
-    http://helpx.adobe.com/experience-manager/kb/SetUpTheAdobeMavenRepository.html
+Este comando compilará os módulos Java (core), front-end (ui.frontend), pacotes de estrutura (ui.apps) e enviará o pacote consolidador (all) diretamente para a sua instância local na porta 4502.

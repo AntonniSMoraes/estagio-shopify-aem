@@ -1,7 +1,11 @@
-<div data-sly-use.model="com.adobe.aem.guides.wknd.core.models.PerfilModel" style="border: 1px solid #ccc; padding: 20px; border-radius: 8px; max-width: 300px;">
-    <h2>${model.nome || 'Nome não definido'}</h2>
-    <h4 data-sly-test="${model.cargo}" style="color: #666;">
-        ${model.cargo}
-    </h4>
-    <p>${model.bio}</p>
+<div data-sly-use.model="com.adobe.aem.guides.wknd.core.models.PerfilModel" class="cmp-perfil">
+    <div class="cmp-perfil__content">
+        <h2 class="cmp-perfil__name">${model.nome || 'Nome não definido'}</h2>
+        
+        <h4 class="cmp-perfil__role" data-sly-test="${model.cargo}">
+            ${model.cargo}
+        </h4>
+        
+        <p class="cmp-perfil__bio">${model.bio}</p>
+    </div>
 </div>
