@@ -4,6 +4,7 @@ Este repositório contém a resolução dos **Desafios Relacionados ao AEM** do 
 
 ## Conteúdo
 1. Solução para o desafio 5.1 - Ambiente + primeiro deploy do WKND
+2. Solução para o desafio 5.2 - Componente do zero: Cartão de Perfil
 
 ## Objetivo do Desafio 5.1
 O objetivo principal deste desafio é provar o domínio do ciclo de desenvolvimento no AEM: **editar → build → deploy → ver no Author**. 
@@ -15,19 +16,43 @@ Para isso, o ambiente de desenvolvimento local foi configurado do zero e o compo
 3. **Dialog (`_cq_dialog/.content.xml`):** Inclusão de um novo campo de input de texto no painel de autoria do AEM.
 4. **HTL (`helloworld.html`):** Marcação visual atualizada para exibir o valor dinâmico do novo campo utilizando a linguagem de template HTL (ex: `${model.subtitulo}`).
 
+## Objetivo do Desafio 5.2
+O objetivo principal deste desafio é construir um componente do zero **(Cartão de Perfil)**, sem herdar dos Core Components da Adobe, para consolidar o entendimento da arquitetura de componentes autônomos no AEM.
+Para isso, toda a estrutura de pastas, dialog, lógica de back-end (Java) e renderização condicional no front-end (HTL) foram desenvolvidas manualmente.
+
+### O que foi implementado:
+1. **Nó do Componente (`.content.xml`):** Criação da raiz do componente no módulo `ui.apps`, definindo sua identidade e alocando-o no grupo "WKND - Custom".
+2. **Sling Model (`PerfilModel.java`):** Criação da classe Java no módulo `core` para resgatar os valores preenchidos pelo autor (Nome, Cargo e Biografia) utilizando a anotação `@ValueMapValue`.
+3. **Dialog (`_cq_dialog/.content.xml`):** Construção da interface de autoria com campos do tipo *textfield* e *textarea*.
+4. **HTL (`perfil.html`):** Desenvolvimento da marcação visual puxando as variáveis do back-end. Foi aplicada a lógica condicional `data-sly-test="${model.cargo}"` para ocultar o elemento HTML do cargo caso o autor deixe o campo em branco.
+5. **Estilização SCSS (`_perfil.scss`):** Aplicação de estilos seguindo a metodologia BEM (ex: `cmp-perfil`) e integração da compilação do arquivo diretamente no `main.scss` do projeto.
+
 ### Evidências de Funcionamento (Prints)
 
 <img width="977" height="662" alt="componente-campo" src="https://github.com/user-attachments/assets/6aef3fd7-79ca-4e0e-9ce2-f6d05f67d874" />
 <br>
-<em>Configuração do componente no modo Author demonstrando o novo campo adicionado.</em>
+<em>5.1 - Configuração do componente no modo Author demonstrando o novo campo adicionado.</em>
 
 <br><br>
 
 <img width="625" height="619" alt="componente-atualizada" src="https://github.com/user-attachments/assets/72476d05-5803-45b8-acb0-2fba79a7f989" />
 <br>
-<em>Resultado final do componente renderizado na página de teste com o subtítulo.</em>
+<em>5.1 - Resultado final do componente renderizado na página de teste com o subtítulo.</em>
 
----
+<br><br>
+
+<img width="977" height="662" alt="componente-campo" src="https://github.com/user-attachments/assets/6aef3fd7-79ca-4e0e-9ce2-f6d05f67d874" />
+<br>
+<em>5.2 - Configuração do Cartão de Perfil no modo Author demonstrando os 3 campos criados.</em>
+
+<br><br>
+
+<img width="625" height="619" alt="componente-atualizada" src="https://github.com/user-attachments/assets/72476d05-5803-45b8-acb0-2fba79a7f989" />
+<br>
+<em>5.2 - Resultado final do Cartão de Perfil estilizado e renderizado na página.</em>
+<br>
+<br>
+
 
 ## Pré-requisitos do Ambiente
 
