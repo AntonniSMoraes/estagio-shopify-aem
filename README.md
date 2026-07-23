@@ -5,6 +5,7 @@ Este repositório contém a resolução dos **Desafios Relacionados ao AEM** do 
 ## Conteúdo
 1. Solução para o desafio 5.1 - Ambiente + primeiro deploy do WKND
 2. Solução para o desafio 5.2 - Componente do zero: Cartão de Perfil
+3. Solução para o desafio 6.1 - Editable Template + Políticas
 
 ## Objetivo do Desafio 5.1
 O objetivo principal deste desafio é provar o domínio do ciclo de desenvolvimento no AEM: **editar → build → deploy → ver no Author**. 
@@ -26,6 +27,18 @@ Para isso, toda a estrutura de pastas, dialog, lógica de back-end (Java) e rend
 3. **Dialog (`_cq_dialog/.content.xml`):** Construção da interface de autoria com campos do tipo *textfield* e *textarea*.
 4. **HTL (`perfil.html`):** Desenvolvimento da marcação visual puxando as variáveis do back-end. Foi aplicada a lógica condicional `data-sly-test="${model.cargo}"` para ocultar o elemento HTML do cargo caso o autor deixe o campo em branco.
 5. **Estilização SCSS (`_perfil.scss`):** Aplicação de estilos seguindo a metodologia BEM (ex: `cmp-perfil`) e integração da compilação do arquivo diretamente no `main.scss` do projeto.
+
+## Objetivo do Desafio 6.1
+O objetivo principal deste desafio é estruturar um **Editable Template** do zero no AEM, definindo as regras de layout, travamentos de estrutura e garantindo o controle do autor por meio de **Políticas (Policies)** de componentes.
+
+### O que foi implementado:
+1. **Criação do Template Editável (`Landing WKND`):** Criação do modelo em `Tools > General > Templates > WKND Site` utilizando a página base.
+2. **Definição da Estrutura (Structure):**
+   - **Header e Footer:** Configuração de componentes *Experience Fragment* vinculados aos fragmentos do WKND e com os cadeados **fechados (travados)** para evitar alteração ou remoção por parte dos autores.
+   - **Layout Container Central:** Configuração do container de conteúdo central com o cadeado **aberto (destravado)**, delimitando a área editável da página.
+3. **Configuração da Política (Policy):** Restrição dos componentes permitidos (*Allowed Components*) no Layout Container central exclusivamente para os 5 Core Components exigidos: **Title**, **Text**, **Image**, **Teaser** e **Button**.
+4. **Ajuste de Layout (Layout Mode):** Utilização do sistema de grid nativo no modo *Layout* para estruturar colunas e alinhamento do container central.
+5. **Validação na Prática (Criação de Página):** Ativação do template (*Enable*) e publicação de uma página de teste via menu *Sites*, comprovando que apenas os 5 componentes permitidos pela política ficam acessíveis no painel de autoria.
 
 ### Evidências de Funcionamento (Prints)
 
