@@ -66,6 +66,13 @@ O objetivo principal deste desafio é estruturar um **Editable Template** do zer
 <br>
 <br>
 
+<br><br>
+
+<img width="1907" height="801" alt="image" src="https://github.com/user-attachments/assets/0b2e954c-b924-44fa-b4a6-ba76ad03079d" />
+<br>
+<em>6.1 - Página criada com template WKND.</em>
+<br>
+<br>
 
 ## Pré-requisitos do Ambiente
 
