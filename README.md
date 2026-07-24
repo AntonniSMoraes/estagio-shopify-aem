@@ -6,6 +6,7 @@ Este repositório contém a resolução dos **Desafios Relacionados ao AEM** do 
 1. Solução para o desafio 5.1 - Ambiente + primeiro deploy do WKND
 2. Solução para o desafio 5.2 - Componente do zero: Cartão de Perfil
 3. Solução para o desafio 6.1 - Editable Template + Políticas
+4. Solução para o desafio 6.2 - Componente Full-Stack com Style System
 
 ## Objetivo do Desafio 5.1
 O objetivo principal deste desafio é provar o domínio do ciclo de desenvolvimento no AEM: **editar → build → deploy → ver no Author**. 
@@ -40,6 +41,16 @@ O objetivo principal deste desafio é estruturar um **Editable Template** do zer
 4. **Ajuste de Layout (Layout Mode):** Utilização do sistema de grid nativo no modo *Layout* para estruturar colunas e alinhamento do container central.
 5. **Validação na Prática (Criação de Página):** Ativação do template (*Enable*) e publicação de uma página de teste via menu *Sites*, comprovando que apenas os 5 componentes permitidos pela política ficam acessíveis no painel de autoria.
 
+## Objetivo do Desafio 6.2
+O objetivo deste sprint foi construir um componente full-stack (Destaque / Callout), unindo todas as camadas de arquitetura do AEM: Node/Dialog, Camada de Negócio (Sling Model Java), Camada de Apresentação (HTL) e Estilização isolada via ClientLib com suporte nativo ao Style System do AEM.
+
+### O que foi implementado:
+1. **Estrutura e Dialog (`ui.apps`):** Criação do nó JCR do componente e de um dialog Touch UI contendo 4 campos configurados: *Título*, *Texto*, *Texto do Botão* e *URL do Botão* (utilizando um campo do tipo `pathbrowser`).
+2. **Sling Model (`core`):** Implementação da classe Java `DestaqueModel.java` com injeção segura (`InjectionStrategy.OPTIONAL`). Foi implementada a regra de negócio `isMostrarBotao()`, garantindo que o botão só seja renderizado dinamicamente se o autor preencher uma URL válida.
+3. **Client Library (`ui.apps`):** Criação de uma ClientLib dedicada (categoria `wknd.destaque`) com a propriedade de segurança `allowProxy="{Boolean}true"`. Os estilos base e as classes modificadoras do Style System (`.cmp-destaque--claro` e `.cmp-destaque--escuro`) foram estruturados no arquivo `style.css`.
+4. **Sightly / HTL (`destaque.html`):** Marcação semântica com invocação da ClientLib customizada via `data-sly-call`. A renderização condicional do botão foi aplicada via `data-sly-test="${model.mostrarBotao}"`, respeitando rigorosamente a separação de responsabilidades (lógica no Java, apresentação no HTML).
+5. **Integração com Style System:** Configuração de uma política (Policy) no template permitindo o componente Destaque e registrando os temas visuais "Claro" e "Escuro", permitindo ao autor alternar o visual dinamicamente na página através do ícone de pincel.
+
 ### Evidências de Funcionamento (Prints)
 
 <img width="977" height="662" alt="componente-campo" src="https://github.com/user-attachments/assets/6aef3fd7-79ca-4e0e-9ce2-f6d05f67d874" />
@@ -71,6 +82,24 @@ O objetivo principal deste desafio é estruturar um **Editable Template** do zer
 <img width="1907" height="801" alt="image" src="https://github.com/user-attachments/assets/0b2e954c-b924-44fa-b4a6-ba76ad03079d" />
 <br>
 <em>6.1 - Página criada com template WKND.</em>
+<br>
+<br>
+
+<br><br>
+
+<img width="1832" height="579" alt="Captura de tela 2026-07-24 023651" src="https://github.com/user-attachments/assets/bf8ee2ee-2c26-4977-a9eb-596f180b430d" />
+
+<br>
+<em>6.2 - Página com template WKND editado para receber os Destaques exibindo o tema claro.</em>
+<br>
+<br>
+
+<br><br>
+
+<img width="1326" height="601" alt="image" src="https://github.com/user-attachments/assets/c67d5e5c-ce73-4386-9a96-36a1723d58db" />
+
+<br>
+<em>6.2 - Página com template WKND editado para receber os Destaques exibindo o tema escuro.</em>
 <br>
 <br>
 
