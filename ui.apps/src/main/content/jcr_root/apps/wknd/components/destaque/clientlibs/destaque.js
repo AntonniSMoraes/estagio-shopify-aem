@@ -1,0 +1,1 @@
+console.log("WKND Destaque: Componente carregado com sucesso.");

@@ -1,0 +1,13 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-call="${clientlib.all @ categories='wknd.destaque'}"/>
+
+<div data-sly-use.model="com.adobe.aem.guides.wknd.core.models.DestaqueModel" 
+     class="cmp-destaque">
+     
+    <h2>${model.titulo}</h2>
+    <p>${model.texto}</p>
+    
+    <sly data-sly-test="${model.mostrarBotao}">
+        <a href="${model.urlBotao}" class="my-button">${model.textoBotao}</a>
+    </sly>
+</div>
