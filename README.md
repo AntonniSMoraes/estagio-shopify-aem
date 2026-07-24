@@ -87,7 +87,8 @@ O objetivo deste sprint foi construir um componente full-stack (Destaque / Callo
 
 <br><br>
 
-<img width="1832" height="579" alt="Captura de tela 2026-07-24 023651" src="https://github.com/user-attachments/assets/bf8ee2ee-2c26-4977-a9eb-596f180b430d" />
+<img width="1851" height="509" alt="Captura de tela 2026-07-24 103632" src="https://github.com/user-attachments/assets/2b8bdc03-70ae-45b6-ace4-d62ff146d6a8" />
+
 
 <br>
 <em>6.2 - Página com template WKND editado para receber os Destaques exibindo o tema claro.</em>
@@ -96,7 +97,7 @@ O objetivo deste sprint foi construir um componente full-stack (Destaque / Callo
 
 <br><br>
 
-<img width="1326" height="601" alt="image" src="https://github.com/user-attachments/assets/c67d5e5c-ce73-4386-9a96-36a1723d58db" />
+<img width="1859" height="228" alt="image" src="https://github.com/user-attachments/assets/02df7707-fa1f-4439-a875-267eed0f7acb" />
 
 <br>
 <em>6.2 - Página com template WKND editado para receber os Destaques exibindo o tema escuro.</em>
