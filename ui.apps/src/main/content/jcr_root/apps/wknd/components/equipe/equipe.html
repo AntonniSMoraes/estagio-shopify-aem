@@ -1,0 +1,11 @@
+<div data-sly-use.model="com.adobe.aem.guides.wknd.core.models.EquipeModel">
+    <div>
+        <h2>${model.nome || 'Nome não definido'}</h2>
+        
+        <h4 data-sly-test="${model.cargo}">
+            ${model.cargo}
+        </h4>
+        
+        <img src="${model.urlImagem}" />
+    </div>
+</div>
