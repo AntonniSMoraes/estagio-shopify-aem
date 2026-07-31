@@ -8,6 +8,8 @@ Este repositório contém a resolução dos **Desafios Relacionados ao AEM** do 
 3. Solução para o desafio 6.1 - Editable Template + Políticas
 4. Solução para o desafio 6.2 - Componente Full-Stack com Style System
 5. Solução para o desafio 7.1 - Componente Equipe com Multifield, Delegação e Serviço OSGi
+6. Solução para o desafio 7.2 - Ultimas do Magazine - query, exporter e endpoint
+
 
 ## Objetivo do Desafio 5.1
 O objetivo principal deste desafio é provar o domínio do ciclo de desenvolvimento no AEM: **editar → build → deploy → ver no Author**. 
@@ -68,6 +70,21 @@ O objetivo deste desafio foi construir o componente Equipe WKND, integrando um M
 4. **HTL e ClientLib dedicada (`clientlib-equipe`):**
    - Renderização semântica em HTL (`equipe.html`) com iteração de lista via `data-sly-list` e carregamento otimizado de imagens.
    - Criação da ClientLib (`categories="[wknd.equipe]"`, `allowProxy="{Boolean}true"`) com estilização responsiva em CSS contendo layout em grid, animações em hover e fotos de perfil em avatares circulares.
+
+## Objetivo do Desafio 7.2
+O objetivo principal deste desafio foi construir um componente avançado que utiliza a API do QueryBuilder para buscar os artigos mais recentes do Magazine, além de expor esses dados via Sling Model Exporter (`.model.json`) e Sling Servlet por `resourceType` (`.ultimas.json`).
+
+### O que foi implementado:
+1. **Sling Model (`UltimasMagazineModel.java`):** Lógica Java responsável por executar a busca dinâmica via `QueryBuilder` filtrando por páginas em `/content/wknd/us/en/magazine` ordenadas por data de criação (`jcr:created desc`). O modelo foi configurado com `@Exporter(name = "jackson", extensions = "json")` e dupla adaptação (`SlingHttpServletRequest` e `Resource`).
+2. **Item DTO (`ArtigoItem.java`):** Modelo utilitário responsável por encapsular os atributos individuais de cada artigo (título, caminho `.html` e imagem).
+3. **Sling Servlet (`UltimasMagazineServlet.java`):** Servlet registrado por `resourceType` com seletor `ultimas` e extensão `json`, retornando a lista serializada dos artigos em formato JSON direto na requisição HTTP.
+4. **Dialog Touch UI (`_cq_dialog/.content.xml`):** Diálogo de autoria configurado com um campo do tipo `numberfield` para permitir ao autor definir a quantidade $N$ de artigos a serem exibidos (valor padrão `4`).
+5. **HTL (`ultimas-do-magazine.html`):** Marcação visual em grid responsiva construída com a linguagem de template HTL (`data-sly-list`) para iterar e exibir os artigos retornados pelo modelo.
+6. **ClientLib & Estilização (`css/magazine.css`):** Criação da biblioteca de cliente (`wknd.site`) contendo os estilos em CSS para renderização dos cards com efeito hover.
+
+#### Sling Servlet ou Sling Model Exporter?
+
+Enquanto Servlet trabalha entregando requisições HTTP diretamente, ao criar endpoints, o Sling Model Exporter utiliza o mesmo model que alimenta o HTL, passando a responder como JSON. Assim sendo, usamos Servlet quando buscamos controle total sobre a requisição HTTP, ou quando queremos executar uma lógica customizada, e usamos Sling Model Exporter quando queremos apenas expor os dados do componente para serem consumidos por um front-end.
 
 ### Evidências de Funcionamento (Prints)
 
