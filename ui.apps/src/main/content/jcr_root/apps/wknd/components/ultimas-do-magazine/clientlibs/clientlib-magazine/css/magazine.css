@@ -1,0 +1,39 @@
+.cmp-ultimas-magazine {
+    margin: 2rem 0;
+}
+.cmp-ultimas-magazine__title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2rem solid #ffef3b;
+    display: inline-block;
+}
+.cmp-ultimas-magazine__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+.cmp-ultimas-magazine__card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    background-color: #bcbbc9;
+}
+.cmp-ultimas-magazine__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+.cmp-ultimas-magazine__link {
+    text-decoration: none;
+    color: inherit;
+}
+.cmp-ultimas-magazine__image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+.cmp-ultimas-magazine__card-title {
+    padding: 1rem;
+    font-size: 1.1rem;
+    margin: 0;
+}
