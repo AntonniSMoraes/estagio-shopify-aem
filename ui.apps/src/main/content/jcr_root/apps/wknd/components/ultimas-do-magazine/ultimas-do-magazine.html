@@ -1,0 +1,20 @@
+<sly data-sly-use.model="com.adobe.aem.guides.wknd.core.models.UltimasMagazineModel"/>
+
+<div class="cmp-ultimas-magazine" data-sly-test="${model.artigos}">
+    <h2 class="cmp-ultimas-magazine__title">Últimas do Magazine</h2>
+    
+    <div class="cmp-ultimas-magazine__grid" data-sly-list.item="${model.artigos}">
+        <div class="cmp-ultimas-magazine__card">
+            <a href="${item.path}" class="cmp-ultimas-magazine__link">
+                <div class="cmp-ultimas-magazine__image-wrapper" data-sly-test="${item.imagem}">
+                    <img src="${item.imagem}" alt="${item.titulo}" class="cmp-ultimas-magazine__image"/>
+                </div>
+                <h3 class="cmp-ultimas-magazine__card-title">${item.titulo}</h3>
+            </a>
+        </div>
+    </div>
+</div>
+
+<sly data-sly-test="${!model.artigos}">
+    <p class="cq-placeholder" data-emptytext="Últimas do Magazine (Nenhum artigo encontrado)"></p>
+</sly>
