@@ -124,7 +124,7 @@ O objetivo deste desafio foi construir o componente Equipe WKND, integrando um M
 
 <br><br>
 
-<img width="1859" height="228" alt="image" src="https://github.com/user-attachments/assets/02df7707-fa1f-4439-a875-267eed0f7acb" />
+<img width="1854" height="845" alt="image" src="https://github.com/user-attachments/assets/ea5ebb37-bcd5-4765-a789-7ae0c65a1785" />
 
 <br>
 <em>7.1 - Página com componente Equipe WKND exibindo cards dentro do limite inicial (3 cards).</em>
