@@ -148,6 +148,26 @@ Enquanto Servlet trabalha entregando requisições HTTP diretamente, ao criar en
 <br>
 <br>
 
+<br><br>
+
+<em>Evidências do exercício 7.2</em>
+
+#### 1. Query Debugger
+<img width="1737" height="726" alt="querybuilder" src="https://github.com/user-attachments/assets/ab40d943-bc79-4e9f-be56-4d41ddca6b76" />
+
+#### 2. Configuração do Diálogo (Touch UI)
+<img width="1885" height="965" alt="pg_magazine" src="https://github.com/user-attachments/assets/cc54f075-3dbb-4295-a2dd-480d6eb915dc" />
+
+
+#### 3. Renderização Visual no Author (HTL + CSS)
+<img width="1857" height="750" alt="pg_magazine_renderizado" src="https://github.com/user-attachments/assets/9c741b11-cbe5-4488-a911-29b448238171" />
+
+#### 4. Resposta via Sling Model Exporter (.model.json)
+<img width="1534" height="620" alt="sling_exporter" src="https://github.com/user-attachments/assets/5801985f-6eb9-4729-abc5-78391cb539f3" />
+
+#### 5. Resposta via Sling Servlet (.ultimas.json)
+<img width="1271" height="491" alt="sling_servlet" src="https://github.com/user-attachments/assets/da2a21aa-aee1-42e7-bfa3-1df5aec5c489" />
+
 ## Pré-requisitos do Ambiente
 
 Antes de configurar o AEM, certifique-se de que os seguintes requisitos estão instalados e configurados:
