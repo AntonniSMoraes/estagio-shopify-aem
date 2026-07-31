@@ -1,0 +1,31 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-call="${clientlib.all @ categories='wknd.equipe'}"/>
+
+<sly data-sly-use.model="com.adobe.aem.guides.wknd.core.models.EquipeModel">
+    <section class="cmp-equipe" data-sly-test="${model.hasMembros}">
+        <h2 class="cmp-equipe__title">${model.titulo}</h2>
+        
+        <div class="cmp-equipe__grid" data-sly-list.membro="${model.membros}">
+            <article class="cmp-equipe__card">
+                <div class="cmp-equipe__card-image-wrapper">
+                    <img data-sly-test="${membro.foto}" 
+                        src="${membro.foto}/_jcr_content/renditions/cq5dam.web.1280.1280.png" 
+                        alt="${membro.nome}" 
+                        class="cmp-equipe__card-image"/>
+                    <div data-sly-test="${!membro.foto}" 
+                         class="cmp-equipe__card-placeholder">
+                        <span>${membro.nome}</span>
+                    </div>
+                </div>
+                
+                <div class="cmp-equipe__card-content">
+                    <h3 class="cmp-equipe__card-name">${membro.nome}</h3>
+                    <p data-sly-test="${membro.cargo}" 
+                       class="cmp-equipe__card-role">${membro.cargo}</p>
+                </div>
+            </article>
+        </div>
+    </section>
+    
+    <div data-sly-test="${!model.hasMembros && wcmmode.edit}" class="cq-placeholder" data-emptytext="Equipe WKND (Adicione membros no diálogo)"></div>
+</sly>
