@@ -7,6 +7,7 @@ Este repositório contém a resolução dos **Desafios Relacionados ao AEM** do 
 2. Solução para o desafio 5.2 - Componente do zero: Cartão de Perfil
 3. Solução para o desafio 6.1 - Editable Template + Políticas
 4. Solução para o desafio 6.2 - Componente Full-Stack com Style System
+5. Solução para o desafio 7.1 - Componente Equipe com Multifield, Delegação e Serviço OSGi
 
 ## Objetivo do Desafio 5.1
 O objetivo principal deste desafio é provar o domínio do ciclo de desenvolvimento no AEM: **editar → build → deploy → ver no Author**. 
@@ -50,6 +51,23 @@ O objetivo deste sprint foi construir um componente full-stack (Destaque / Callo
 3. **Client Library (`ui.apps`):** Criação de uma ClientLib dedicada (categoria `wknd.destaque`) com a propriedade de segurança `allowProxy="{Boolean}true"`. Os estilos base e as classes modificadoras do Style System (`.cmp-destaque--claro` e `.cmp-destaque--escuro`) foram estruturados no arquivo `style.css`.
 4. **Sightly / HTL (`destaque.html`):** Marcação semântica com invocação da ClientLib customizada via `data-sly-call`. A renderização condicional do botão foi aplicada via `data-sly-test="${model.mostrarBotao}"`, respeitando rigorosamente a separação de responsabilidades (lógica no Java, apresentação no HTML).
 5. **Integração com Style System:** Configuração de uma política (Policy) no template permitindo o componente Destaque e registrando os temas visuais "Claro" e "Escuro", permitindo ao autor alternar o visual dinamicamente na página através do ícone de pincel.
+
+## Objetivo do Desafio 7.1
+O objetivo deste desafio foi construir o componente Equipe WKND, integrando um Multifield de itens compostos no diálogo de autoria, delegação e limitação de exibição por Serviço OSGi com configuração em runtime, e estilização dedicada via ClientLib responsiva em formato de cards.
+
+### O que foi implementado:
+1. **Configuração e Serviço OSGi (`MostrarEquipeService`):**
+   - Criação da interface de configuração `@ObjectClassDefinition` (`MostrarEquipeConfig.java`) contendo a propriedade global `maxMembros`.
+   - Implementação do serviço OSGi (`MostrarEquipeServiceImpl.java`) anotado com `@Component` e `@Designate`, permitindo alterar a quantidade máxima de membros exibidos dinamicamente no Web Console (`/system/console/configMgr`) sem necessidade de redeploy da aplicação.
+2. **Sling Model (`EquipeModel.java`):**
+   - Mapeamento da coleção de membros cadastrados via multifield utilizando a anotação `@ChildResource`.
+   - Injeção do serviço OSGi via `@OSGiService` para aplicar a regra de limitação (`limit()`) dos membros a serem entregues para a camada de apresentação.
+   - Aplicação de tratamento gracioso contra valores nulos (`DefaultInjectionStrategy.OPTIONAL`) e regras de resiliência.
+3. **Diálogo Touch UI (`_cq_dialog`):**
+   - Construção do diálogo estruturado em `granite/ui/components/coral/foundation/form/multifield` para cadastro do *Título da Seção* e múltiplos membros contendo os campos: *Nome* (`textfield`), *Cargo* (`textfield`) e *Foto* (`pathfield`).
+4. **HTL e ClientLib dedicada (`clientlib-equipe`):**
+   - Renderização semântica em HTL (`equipe.html`) com iteração de lista via `data-sly-list` e carregamento otimizado de imagens.
+   - Criação da ClientLib (`categories="[wknd.equipe]"`, `allowProxy="{Boolean}true"`) com estilização responsiva em CSS contendo layout em grid, animações em hover e fotos de perfil em avatares circulares.
 
 ### Evidências de Funcionamento (Prints)
 
@@ -101,6 +119,15 @@ O objetivo deste sprint foi construir um componente full-stack (Destaque / Callo
 
 <br>
 <em>6.2 - Página com template WKND editado para receber os Destaques exibindo o tema escuro.</em>
+<br>
+<br>
+
+<br><br>
+
+<img width="1859" height="228" alt="image" src="https://github.com/user-attachments/assets/02df7707-fa1f-4439-a875-267eed0f7acb" />
+
+<br>
+<em>7.1 - Página com componente Equipe WKND exibindo cards dentro do limite inicial (3 cards).</em>
 <br>
 <br>
 
