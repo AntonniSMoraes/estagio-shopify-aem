@@ -206,15 +206,19 @@ A referência cria uma arquitetura independente, gerando escalabilidade e reuso,
 <em>Evidências do exercício 8.1</em>
 
 **1. Query List (Com dados aninhados do Instrutor)**
+<img width="1712" height="843" alt="Query List no GraphiQL" src="https://github.com/user-attachments/assets/8d466de9-e913-4b35-8483-e82a71ede30f" />
 
 
 **2. Query By Path (Busca de aventura específica)**
+<img width="1902" height="803" alt="QueryByPath" src="https://github.com/user-attachments/assets/acd08350-1cf9-4ccc-8484-cfbd6e81891e" />
 
 
 **3. Query com Filtro Dinâmico (Variáveis)**
+<img width="1610" height="820" alt="QueryComFiltro" src="https://github.com/user-attachments/assets/56947c21-9b45-4c5e-b688-68e3383610db" />
 
 
 **4. Persisted Query (Resposta JSON via GET no navegador)**
+<img width="795" height="677" alt="queryNoNavegador" src="https://github.com/user-attachments/assets/72de05bd-f42d-4256-b275-f681ffe3417f" />
 
 
 ## Pré-requisitos do Ambiente
