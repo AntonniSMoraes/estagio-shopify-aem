@@ -113,6 +113,12 @@ Criar uma arquitetura de conteúdo Headless no AEM utilizando Content Fragment M
 
 Foi utilizado o tipo Enumeração para garantir a padronização dos dados. Usar outros tipos para esses campos poderia causar problemas ao tentar criar filtros, no sentido de que o usuário pode acabar criando variações da mesma palavra (por exemplo, uma palavra começando com letra maiúscula e outra não, ou até mesmo sinônimos). Assim sendo, a escolha de enumeração restringe o usuário a opções travadas.
 
+Além disso, nos instrutores, o Enumaration foi alterado de `Dropdown` para `Checkbox`, assim o usuário pode cadastrar um instrutor com mais de uma especialidade.
+
+**Por que utilizar Referência de Fragmento (Fragment Reference) no Instrutor?**
+
+A referência cria uma arquitetura independente, gerando escalabilidade e reuso, ou seja, (no exemplo do desafio) um mesmo instrutor pode guiar várias aventuras diferentes, possibilitando que a API do GraphQL resolva o relacionamento trazendo os dados aninhados em uma única requisição. Caso o instrutor atualize seus dados, a atualização será refletida instantaneamente em todas aventuras vinculadas a ele.
+
 ### Evidências de Funcionamento (Prints)
 
 <img width="977" height="662" alt="componente-campo" src="https://github.com/user-attachments/assets/6aef3fd7-79ca-4e0e-9ce2-f6d05f67d874" />
