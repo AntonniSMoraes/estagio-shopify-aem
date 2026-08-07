@@ -9,6 +9,7 @@ Este repositório contém a resolução dos **Desafios Relacionados ao AEM** do 
 4. Solução para o desafio 6.2 - Componente Full-Stack com Style System
 5. Solução para o desafio 7.1 - Componente Equipe com Multifield, Delegação e Serviço OSGi
 6. Solução para o desafio 7.2 - Ultimas do Magazine - query, exporter e endpoint
+7. Solução para o desafio 8.1 - Modelando o Catálogo de Aventuras
 
 
 ## Objetivo do Desafio 5.1
@@ -85,6 +86,38 @@ O objetivo principal deste desafio foi construir um componente avançado que uti
 #### Sling Servlet ou Sling Model Exporter?
 
 Enquanto Servlet trabalha entregando requisições HTTP diretamente, ao criar endpoints, o Sling Model Exporter utiliza o mesmo model que alimenta o HTL, passando a responder como JSON. Assim sendo, usamos Servlet quando buscamos controle total sobre a requisição HTTP, ou quando queremos executar uma lógica customizada, e usamos Sling Model Exporter quando queremos apenas expor os dados do componente para serem consumidos por um front-end.
+
+## Objetivo do Desafio 8.1
+Criar uma arquitetura de conteúdo Headless no AEM utilizando Content Fragment Models (CFMs), cadastrar o conteúdo e expô-lo via API GraphQL utilizando consultas persistidas.
+
+### O que foi implementado:
+1. **Content Fragment Models (CFMs):**
+   - Criação do modelo Instrutor contendo os campos: *Nome* (`Single line text`), *Bio* (`Multi line text` em Rich Text), *Especialidades* (`Enumeration` múltipla), *Foto* (`Content Reference`) e *Anos de experiência* (`Number` com validação de valor mínimo 0).
+   - Criação do modelo Aventura contendo os campos: *Título*, *Descrição*, *Dificuldade* (`Enumeration`), *Preço* (`Number`), *Imagem* (`Content Reference`) e o campo fundamental de Instrutor (`Fragment Reference`), estabelecendo o relacionamento entre os dois modelos.
+2. **Instâncias de Conteúdo (Content Fragments):**
+   - Cadastro de 3 instâncias baseadas no modelo de Instrutores.
+   - Cadastro de 4 instâncias baseadas no modelo de Aventuras, utilizando o campo de referência de fragmento para vincular cada aventura ao seu respectivo instrutor real no repositório.
+3. **Configuração da API GraphQL:**
+   - Habilitação da permissão de GraphQL Persistent Queries na pasta raiz do projeto através do *Configuration Browser*.
+   - Criação de um Endpoint GraphQL dedicado e atrelado à configuração do projeto em `Tools > General > GraphQL`, permitindo a exposição segura dos modelos.
+4. **Desenvolvimento e Persistência de Queries (GraphiQL):**
+   - Escrita e validação de 3 consultas distintas na IDE embutida do AEM: 
+     - **Query List:** Trazendo a lista de aventuras com os dados do instrutor aninhados via fragment spread (`... on InstrutorModel`).
+     - **Query ByPath:** Busca isolada de um fragmento pelo seu caminho absoluto.
+     - **Query com Filtro:** Busca utilizando argumentos dinâmicos (Variables) para filtrar aventuras pela dificuldade.
+   - Persistência da *Query List* no repositório e validação do seu funcionamento através de uma chamada HTTP **GET** no navegador acessando a rota `/graphql/execute.json/...`.
+
+### Decisões de Modelagem
+
+**Por que utilizar Enumeração (Enumeration) para a Dificuldade e Especialidades?**
+
+Foi utilizado o tipo Enumeração para garantir a padronização dos dados. Usar outros tipos para esses campos poderia causar problemas ao tentar criar filtros, no sentido de que o usuário pode acabar criando variações da mesma palavra (por exemplo, uma palavra começando com letra maiúscula e outra não, ou até mesmo sinônimos). Assim sendo, a escolha de enumeração restringe o usuário a opções travadas.
+
+Além disso, nos instrutores, o Enumaration foi alterado de `Dropdown` para `Checkbox`, assim o usuário pode cadastrar um instrutor com mais de uma especialidade.
+
+**Por que utilizar Referência de Fragmento (Fragment Reference) no Instrutor?**
+
+A referência cria uma arquitetura independente, gerando escalabilidade e reuso, ou seja, (no exemplo do desafio) um mesmo instrutor pode guiar várias aventuras diferentes, possibilitando que a API do GraphQL resolva o relacionamento trazendo os dados aninhados em uma única requisição. Caso o instrutor atualize seus dados, a atualização será refletida instantaneamente em todas aventuras vinculadas a ele.
 
 ### Evidências de Funcionamento (Prints)
 
@@ -167,6 +200,26 @@ Enquanto Servlet trabalha entregando requisições HTTP diretamente, ao criar en
 
 #### 5. Resposta via Sling Servlet (.ultimas.json)
 <img width="1271" height="491" alt="sling_servlet" src="https://github.com/user-attachments/assets/da2a21aa-aee1-42e7-bfa3-1df5aec5c489" />
+
+<br><br>
+
+<em>Evidências do exercício 8.1</em>
+
+**1. Query List (Com dados aninhados do Instrutor)**
+<img width="1712" height="843" alt="Query List no GraphiQL" src="https://github.com/user-attachments/assets/8d466de9-e913-4b35-8483-e82a71ede30f" />
+
+
+**2. Query By Path (Busca de aventura específica)**
+<img width="1902" height="803" alt="QueryByPath" src="https://github.com/user-attachments/assets/acd08350-1cf9-4ccc-8484-cfbd6e81891e" />
+
+
+**3. Query com Filtro Dinâmico (Variáveis)**
+<img width="1610" height="820" alt="QueryComFiltro" src="https://github.com/user-attachments/assets/56947c21-9b45-4c5e-b688-68e3383610db" />
+
+
+**4. Persisted Query (Resposta JSON via GET no navegador)**
+<img width="795" height="677" alt="queryNoNavegador" src="https://github.com/user-attachments/assets/72de05bd-f42d-4256-b275-f681ffe3417f" />
+
 
 ## Pré-requisitos do Ambiente
 
