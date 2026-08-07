@@ -123,6 +123,8 @@ A referência cria uma arquitetura independente, gerando escalabilidade e reuso,
 ## Objetivo do Desafio 8.2
 O objetivo principal deste desafio foi desenvolver um aplicativo web externo e responsivo (fora da infraestrutura do AEM) consumindo a API Headless desenvolvida no exercício 8.1 através de Persisted Queries parametrizadas para exibir uma vitrine dinâmica de aventuras.
 
+Link para o repositório Front-End: https://github.com/AntonniSMoraes/atividade-aem-front
+
 ### O que foi implementado:
 
 1. **Estrutura e Arquitetura Frontend Pura (Vanilla JS):**
