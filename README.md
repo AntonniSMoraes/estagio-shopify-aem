@@ -10,6 +10,7 @@ Este repositório contém a resolução dos **Desafios Relacionados ao AEM** do 
 5. Solução para o desafio 7.1 - Componente Equipe com Multifield, Delegação e Serviço OSGi
 6. Solução para o desafio 7.2 - Ultimas do Magazine - query, exporter e endpoint
 7. Solução para o desafio 8.1 - Modelando o Catálogo de Aventuras
+8. Solução para o desafio 8.2 - Vitrine headless
 
 
 ## Objetivo do Desafio 5.1
@@ -241,6 +242,26 @@ O objetivo principal deste desafio foi desenvolver um aplicativo web externo e r
 **4. Persisted Query (Resposta JSON via GET no navegador)**
 <img width="795" height="677" alt="queryNoNavegador" src="https://github.com/user-attachments/assets/72de05bd-f42d-4256-b275-f681ffe3417f" />
 
+<br><br>
+
+<em>Evidências do exercício 8.2</em>
+
+**1. Frontend criado com html, css e JavaScript Vanilla**
+<img width="1888" height="935" alt="front-end-js-vanilla" src="https://github.com/user-attachments/assets/a4786475-1661-4a7f-85f1-e9bd936e13b6" />
+
+<img width="1884" height="944" alt="front-end-js-vanilla-bottom" src="https://github.com/user-attachments/assets/a417a979-9f76-4e36-8f6c-0a908aab2ddb" />
+
+**2. Frontend criado com html, css e JavaScript Vanilla (mobile)**
+<img width="589" height="937" alt="front-end-js-vanilla-mobile" src="https://github.com/user-attachments/assets/f012424c-8695-439b-9a9e-704b413de773" />
+
+<img width="586" height="912" alt="front-end-js-vanilla-mobile-menu" src="https://github.com/user-attachments/assets/26936482-3893-4884-85be-1a3df2c7701a" />
+
+<img width="595" height="905" alt="front-end-js-vanilla-mobile-bottom" src="https://github.com/user-attachments/assets/e531abd5-3826-4c14-82bc-4b4a1f78f554" />
+
+<img width="588" height="923" alt="front-end-js-vanilla-mobile-bottom-2" src="https://github.com/user-attachments/assets/4cd9d03b-074d-4364-bcfe-0bf8d50ec9ff" />
+
+**3. Retorno da requisição http**
+<img width="1047" height="648" alt="retorno-requisição" src="https://github.com/user-attachments/assets/66414725-9169-4119-bc52-ae14b438a8b8" />
 
 ## Pré-requisitos do Ambiente
 
