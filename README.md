@@ -88,7 +88,7 @@ O objetivo principal deste desafio foi construir um componente avançado que uti
 Enquanto Servlet trabalha entregando requisições HTTP diretamente, ao criar endpoints, o Sling Model Exporter utiliza o mesmo model que alimenta o HTL, passando a responder como JSON. Assim sendo, usamos Servlet quando buscamos controle total sobre a requisição HTTP, ou quando queremos executar uma lógica customizada, e usamos Sling Model Exporter quando queremos apenas expor os dados do componente para serem consumidos por um front-end.
 
 ## Objetivo do Desafio 8.1
-Criar uma arquitetura de conteúdo Headless no AEM utilizando Content Fragment Models (CFMs), cadastrar o conteúdo e expô-lo via API GraphQL utilizando consultas persistidas.
+O objetivo principal deste desafio foi criar uma arquitetura de conteúdo Headless no AEM utilizando Content Fragment Models (CFMs), cadastrar o conteúdo e expô-lo via API GraphQL utilizando consultas persistidas.
 
 ### O que foi implementado:
 1. **Content Fragment Models (CFMs):**
@@ -118,6 +118,27 @@ Além disso, nos instrutores, o Enumaration foi alterado de `Dropdown` para `Che
 **Por que utilizar Referência de Fragmento (Fragment Reference) no Instrutor?**
 
 A referência cria uma arquitetura independente, gerando escalabilidade e reuso, ou seja, (no exemplo do desafio) um mesmo instrutor pode guiar várias aventuras diferentes, possibilitando que a API do GraphQL resolva o relacionamento trazendo os dados aninhados em uma única requisição. Caso o instrutor atualize seus dados, a atualização será refletida instantaneamente em todas aventuras vinculadas a ele.
+
+## Objetivo do Desafio 8.2
+O objetivo principal deste desafio foi desenvolver um aplicativo web externo e responsivo (fora da infraestrutura do AEM) consumindo a API Headless desenvolvida no exercício 8.1 através de Persisted Queries parametrizadas para exibir uma vitrine dinâmica de aventuras.
+
+### O que foi implementado:
+
+1. **Estrutura e Arquitetura Frontend Pura (Vanilla JS):**
+   - Construção do aplicativo utilizando HTML5, CSS3 e JavaScript ES6+ modular (`config.js`, `api.js` e `app.js`), sem o uso de bibliotecas ou frameworks externos.
+   - Configuração de isolamento de variáveis de ambiente no `config.js` (colocado no gitignore) e abstração das chamadas HTTP via `fetch` na camada de serviço `api.js`.
+
+2. **Consumo de Persisted Queries Parametrizadas (GraphQL):**
+   - Consumo da Persisted Query base de aventuras via requisição **GET** utilizando o endpoint `/graphql/execute.json/wknd/allAventuras`.
+   - Implementação do filtro por dificuldade utilizando uma Persisted Query parametrizada (`withFilter;nivel=...`). O parâmetro é transmitido nativamente via rota/URL da requisição HTTP sem a necessidade de concatenações ou manipulações de strings de consulta GraphQL no lado do cliente.
+
+3. **Gerenciamento de Mídia & Autenticação (AEM Author):**
+   - Criação do utilitário assíncrono `carregarImagemAutenticada` para requisitar mídias do repositório DAM (`/content/dam/...`) injetando os cabeçalhos de autenticação HTTP (`Authorization: Basic`) e convertendo a resposta binária em URLs dinâmicas de memória com `URL.createObjectURL`.
+
+4. **Interface e Layout Responsivo (Mobile-First):**
+   - Implementação do catálogo utilizando **CSS Grid** e **Flexbox** para garantir alinhamentos uniformes, colunas adaptáveis e cartões de tamanho homogêneo independentemente do volume de texto.
+   - Criação de um menu mobile expansível (*Menu Hambúrguer*) adaptado para telas pequenas.
+   - Otimização da animação do carrossel principal via técnicas de *fade* por sobreposição CSS, eliminando chamadas repetitivas e desnecessárias na rede.
 
 ### Evidências de Funcionamento (Prints)
 
